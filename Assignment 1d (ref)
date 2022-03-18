@@ -1,0 +1,26 @@
+import cv2
+import numpy as np
+img = np.zeros([640,640,3],np.uint8)
+img[:,:]=(125,125,125)
+
+cam=cv2.VideoCapture(0)
+def nil(x):
+    pass
+cv2.namedWindow('MBS3532')
+cv2.createTrackbar('X_cos','MBS3532',0,640,nil)
+cv2.createTrackbar('Y_cos','MBS3532',0,640,nil)
+
+
+while True:
+
+    success,img=cam.read()
+    x=cv2.getTrackbarPos('X_cos','MBS3532')
+    y=cv2.getTrackbarPos('Y_cos', 'MBS3532')
+    cv2.line(img, (0, x), (640,x), (255, 255, 0), 3)
+    cv2.line(img, (y, 0), (y, 640), (255, 255, 0), 3)
+
+    cv2.imshow('MBS3532',img)
+    if cv2.waitKey(1) & 0xff == 27:
+        break
+
+        cv2.destroyAllWindows()
