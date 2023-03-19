@@ -5,7 +5,7 @@ import time
 cam = cv2.VideoCapture(0)
 
 mpHands = mp.solutions.hands
-hands = mpHands.Hands(min_detection_confidence=0.8,
+hands = mpHands.Hands(max_num_hands=2, min_detection_confidence=0.8,
                       min_tracking_confidence=0.6)
 mpDraw = mp.solutions.drawing_utils
 
@@ -28,14 +28,14 @@ while True:
                 # Highlight all finger tips
                 if id == 4:
                     cv2.circle(img, (cx, cy), 10, (255, 0, 255), cv2.FILLED)
-                if id == 8:
-                    cv2.circle(img, (cx, cy), 10, (255, 0, 0), cv2.FILLED)
-                if id == 12:
-                    cv2.circle(img, (cx, cy), 10, (0, 0, 255), cv2.FILLED)
-                if id == 16:
-                    cv2.circle(img, (cx, cy), 10, (255, 255, 255), cv2.FILLED)
+                # if id == 8:
+                #     cv2.circle(img, (cx, cy), 10, (255, 0, 0), cv2.FILLED)
+                # if id == 12:
+                #     cv2.circle(img, (cx, cy), 10, (0, 0, 255), cv2.FILLED)
+                # if id == 16:
+                #     cv2.circle(img, (cx, cy), 10, (255, 255, 255), cv2.FILLED)
                 if id == 20:
-                    cv2.circle(img, (cx, cy), 10, (125, 0, 125), cv2.FILLED)
+                    cv2.circle(img, (cx, cy), 10, (125, 0, 125), 3)
 
             mpDraw.draw_landmarks(img, handLandmarks, mpHands.HAND_CONNECTIONS)
 
