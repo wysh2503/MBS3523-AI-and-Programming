@@ -5,12 +5,12 @@ import numpy as np
 
 faceCascade = cv2.CascadeClassifier('Resources/haarcascade_frontalface_default.xml')
 
-ser = serial.Serial('COM7',baudrate=115200,timeout=1)
+ser = serial.Serial('COM7',baudrate=115200,timeout=1) # Check and change the COM port to match with your Arduino connection
 time.sleep(0.5)
 pos = 90
 # print(type(pos))
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 while True:
     ret, img = cam.read()
@@ -24,14 +24,14 @@ while True:
         if abs(errorPan) > 20:
             pos = pos - errorPan/30
             print(type(pos))
-        if pos > 160:
-            pos = 160
+        if pos > 150:
+            pos = 150
             print("Out of range")
-        if pos < 0:
-            pos = 0
+        if pos < 10:
+            pos = 10
             print("out of range")
         servoPos = str(pos) + '\r'
-        ser.write(servoPos.encode())
+        ser.write(servoPos.encode('utf-8'))
         print('servoPos = ', servoPos)
         # print(type(pos))
         time.sleep(0.1)
