@@ -6,7 +6,7 @@ int pos;
 
 void setup() {
   // put your setup code here, to run once:
-Serial.begin(19200);
+Serial.begin(115200);
 myServo.attach(servoPin);
 myServo.write(90);
 }
